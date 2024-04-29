@@ -30,6 +30,10 @@ body {
     border-radius: 2vh;
 }
 
+
+/* Register */
+
+
 .register{
   width: 50vh;
   height: 50vh; 
@@ -91,6 +95,10 @@ body {
   position: relative;
 }
 
+.form-group-register input.form-input-register::placeholder {
+  color: #003C43;
+}
+
 .form-group-register label {
   position: absolute;
   top: 0;
@@ -113,7 +121,7 @@ body {
 
 
 
-
+/* Login */
 
 .login {
     width: 50vh;
