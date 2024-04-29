@@ -30,17 +30,96 @@ body {
     border-radius: 2vh;
 }
 
-.signin{
+.register{
   width: 50vh;
   height: 50vh; 
+  position: relative;
 }
+
+.registerCadre {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form-register {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vh;
+}
+
+.heading-register {
+  font-size: 2.5vh;
+  font-weight: 600;
+  color: #003C43;
+}
+
+.form-input-register {
+  color: #003C43;
+  background: transparent;
+  border: 1px solid #003C43;
+  border-radius: 5px;
+  padding: 0.7vh;
+  outline: none;
+  width: 25vh;
+}
+
+.button-register {
+  border-radius: 5px;
+  padding: 0.5vh;
+  background: #ffffff14;
+  color: #003C43;
+  border: 1px solid #003C43;
+  width: 8vh;
+  font-size: 1.5vh;
+}
+
+.button-register:hover {
+  background: #003C43;
+  color: #E3FEF7;
+  cursor: pointer;
+}
+
+.form-group-register {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  color: #003C43;
+  position: relative;
+}
+
+.form-group-register label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.5vh;
+  pointer-events: none;
+  transition: 0.5s;
+  font-size: 1.5vh;
+}
+
+.form-group-register input:focus ~ label,
+.form-group-register input:valid ~ label {
+  top: -2vh;
+  left: 0;
+  padding: 0.5vh 0 0 0;
+  color: #003C43;
+  font-size: 12px;
+}  
+
+
+
+
+
 
 .login {
     width: 50vh;
     height: 50vh; 
     position: relative;
     
-    /*filter: blur(2px); */
     border-radius: 100%;
     border-top-right-radius: 2vh;
     border-bottom-right-radius: 2vh;
