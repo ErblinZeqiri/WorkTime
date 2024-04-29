@@ -11,6 +11,17 @@ body {
     align-items: center;
 }
 
+.inter-500 {
+  font-size: 10vh;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+      "slnt" 0;
+  color: #135D66;
+}
+
 .main-content {
     justify-content: center;
     align-items: center;
