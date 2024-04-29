@@ -49,3 +49,77 @@ body {
              20px 20px 50px #003C43;
   }
   
+  .loginCadre {    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+  .form {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+  }
+  
+  .heading {
+    font-size: 2.5vh;
+    font-weight: 600;
+    color: #77B0AA;
+  }
+  
+  .form-input {
+    color: #77B0AA;
+    background: transparent;
+    border: 1px solid #77B0AA;
+    border-radius: 5px;
+    padding: 0.7vh;
+    outline: none;
+    width: 25vh;
+  }
+  
+  button {
+    border-radius: 5px;
+    padding: 0.5vh;
+    background: #ffffff14;
+    color: #77B0AA;
+    border: 1px solid #77B0AA;
+    width: 8vh;
+    font-size: 1.5vh;
+  }
+  
+  button:hover {
+    background: #77B0AA;
+    color: #E3FEF7;
+    cursor: pointer;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    color: #77B0AA;
+    position: relative;
+  }
+  
+  .form-group label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.5vh;
+    pointer-events: none;
+    transition: 0.5s;
+    font-size: 1.5vh;
+  }
+  
+  .form-group input:focus ~ label,
+  .form-group input:valid ~ label {
+    top: -2vh;
+    left: 0;
+    padding: 0.5vh 0 0 0;
+    color: #77B0AA;
+    font-size: 12px;
+  }  
+
