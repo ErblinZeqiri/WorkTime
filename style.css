@@ -1,42 +1,22 @@
 body {
-    background-color: #E3FEF7;
-}
-
-.title {
-    width: 100vh;
-    height: 20vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.inter-500 {
-  font-size: 10vh;
-  font-family: "Inter", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-variation-settings:
-      "slnt" 0;
-  color: #135D66;
+  background-color: #E3FEF7;
 }
 
 .main-content {
-    justify-content: center;
-    align-items: center;
-    background-color: #77B0AA;
-    box-shadow: 0px 0px 105px 45px rgba(119,176,170,0.9);
-    border-radius: 2vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #77B0AA;
+  box-shadow: 0px 0px 105px 45px rgba(119, 176, 170, 0.9);
+  border-radius: 2vh;
 }
 
 
 /* Register */
 
 
-.register{
+.register {
   width: 50vh;
-  height: 50vh; 
+  height: 50vh;
   position: relative;
 }
 
@@ -109,14 +89,14 @@ body {
   font-size: 1.5vh;
 }
 
-.form-group-register input:focus ~ label,
-.form-group-register input:valid ~ label {
+.form-group-register input:focus~label,
+.form-group-register input:valid~label {
   top: -2vh;
   left: 0;
   padding: 0.5vh 0 0 0;
   color: #003C43;
   font-size: 12px;
-}  
+}
 
 
 
@@ -124,89 +104,107 @@ body {
 /* Login */
 
 .login {
-    width: 50vh;
-    height: 50vh; 
-    position: relative;
-    
-    border-radius: 100%;
-    border-top-right-radius: 2vh;
-    border-bottom-right-radius: 2vh;
-    background-color: #003C43;
-    box-shadow:  -20px -20px 50px #003C43,
-             20px 20px 50px #003C43;
-  }
-  
-  .loginCadre {    
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  width: 50vh;
+  height: 50vh;
+  position: relative;
 }
 
-  .form {
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2vh;
-  }
-  
-  .heading {
-    font-size: 2.5vh;
-    font-weight: 600;
-    color: #77B0AA;
-  }
-  
-  .form-input {
-    color: #77B0AA;
-    background: transparent;
-    border: 1px solid #77B0AA;
-    border-radius: 5px;
-    padding: 0.7vh;
-    outline: none;
-    width: 25vh;
-  }
-  
-  button {
-    border-radius: 5px;
-    padding: 0.5vh;
-    background: #ffffff14;
-    color: #77B0AA;
-    border: 1px solid #77B0AA;
-    width: 8vh;
-    font-size: 1.5vh;
-  }
-  
-  button:hover {
-    background: #77B0AA;
-    color: #E3FEF7;
-    cursor: pointer;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 2vh;
-    color: #77B0AA;
-    position: relative;
-  }
-  
-  .form-group label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 0.5vh;
-    pointer-events: none;
-    transition: 0.5s;
-    font-size: 1.5vh;
-  }
-  
-  .form-group input:focus ~ label,
-  .form-group input:valid ~ label {
-    top: -2vh;
-    left: 0;
-    padding: 0.5vh 0 0 0;
-    color: #77B0AA;
-    font-size: 12px;
-  }  
+.loginCadre {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
+.form {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vh;
+}
+
+.heading {
+  font-size: 2.5vh;
+  font-weight: 600;
+  color: #003C43;
+}
+
+.form-input {
+  color: #003C43;
+  background: transparent;
+  border: 1px solid #003C43;
+  border-radius: 5px;
+  padding: 0.7vh;
+  outline: none;
+  width: 25vh;
+}
+
+button {
+  border-radius: 5px;
+  padding: 0.5vh;
+  background: #ffffff14;
+  color: #003C43;
+  border: 1px solid #003C43;
+  width: 8vh;
+  font-size: 1.5vh;
+}
+
+button:hover {
+  background: #003C43;
+  color: #E3FEF7;
+  cursor: pointer;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  color: #003C43;
+  position: relative;
+}
+
+.form-group label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.5vh;
+  pointer-events: none;
+  transition: 0.5s;
+  font-size: 1.5vh;
+}
+
+.form-group input:focus~label,
+.form-group input:valid~label {
+  top: -2vh;
+  left: 0;
+  padding: 0.5vh 0 0 0;
+  color: #003C43;
+  font-size: 12px;
+}
+
+/* logo */
+.logo {
+  width: 50vh;
+  height: 50vh;
+  position: relative;
+
+  border-radius: 100%;
+  border-top-right-radius: 2vh;
+  border-bottom-right-radius: 2vh;
+  background-color: #003C43;
+  box-shadow: -20px -20px 50px #003C43,
+    20px 20px 50px #003C43;
+}
+
+.logoCadre {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.logoCadre img {
+  max-width: 35vh;
+  max-height: 35vh;
+}
