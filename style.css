@@ -7,105 +7,16 @@ body {
   align-items: center;
   background-color: #77B0AA;
   box-shadow: 0px 0px 105px 45px rgba(119, 176, 170, 0.9);
-  border-radius: 2vh;
-}
-
-
-/* Register */
-
-
-.register {
-  width: 50vh;
-  height: 50vh;
-  position: relative;
-}
-
-.registerCadre {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.form-register {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2vh;
-}
-
-.heading-register {
-  font-size: 2.5vh;
-  font-weight: 600;
-  color: #003C43;
-}
-
-.form-input-register {
-  color: #003C43;
-  background: transparent;
-  border: 1px solid #003C43;
-  border-radius: 5px;
-  padding: 0.7vh;
-  outline: none;
-  width: 25vh;
-}
-
-.button-register {
-  border-radius: 5px;
-  padding: 0.5vh;
-  background: #ffffff14;
-  color: #003C43;
-  border: 1px solid #003C43;
-  width: 8vh;
-  font-size: 1.5vh;
-}
-
-.button-register:hover {
-  background: #003C43;
-  color: #E3FEF7;
-  cursor: pointer;
-}
-
-.form-group-register {
-  display: flex;
-  flex-direction: column;
-  gap: 2vh;
-  color: #003C43;
-  position: relative;
-}
-
-.form-group-register input.form-input-register::placeholder {
-  color: #003C43;
-}
-
-.form-group-register label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 0.5vh;
-  pointer-events: none;
-  transition: 0.5s;
-  font-size: 1.5vh;
-}
-
-.form-group-register input:focus~label,
-.form-group-register input:valid~label {
-  top: -2vh;
-  left: 0;
-  padding: 0.5vh 0 0 0;
-  color: #003C43;
-  font-size: 12px;
+  border-radius: 7px;
 }
 
 
 
-
-/* Login */
+/* Login / Register */
 
 .login {
-  width: 50vh;
-  height: 50vh;
+  width: 60vh;
+  height: 80vh;
   position: relative;
 }
 
@@ -116,77 +27,165 @@ body {
   transform: translate(-50%, -50%);
 }
 
+.form-container {
+  width: 350px;
+}
+
+.title {
+  text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: 0 0 30px 0;
+  font-size: 28px;
+  font-weight: 800;
+  color: #003C43;
+}
+
 .form {
-  color: white;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2vh;
+  gap: 18px;
+  margin-bottom: 15px;
 }
 
-.heading {
-  font-size: 2.5vh;
-  font-weight: 600;
-  color: #003C43;
+.input {
+  border-radius: 20px;
+  border: 1px solid #c0c0c0;
+  outline: 0 !important;
+  box-sizing: border-box;
+  padding: 12px 15px;
+  width: 100%;
 }
 
-.form-input {
-  color: #003C43;
-  background: transparent;
-  border: 1px solid #003C43;
-  border-radius: 5px;
-  padding: 0.7vh;
-  outline: none;
-  width: 25vh;
-}
 
-button {
-  border-radius: 5px;
-  padding: 0.5vh;
-  background: #ffffff14;
-  color: #003C43;
-  border: 1px solid #003C43;
-  width: 8vh;
-  font-size: 1.5vh;
-}
+/* Dropdown search */
 
-button:hover {
-  background: #003C43;
-  color: #E3FEF7;
-  cursor: pointer;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 2vh;
-  color: #003C43;
+.dropdown {
   position: relative;
+  width: 100%;
 }
 
-.form-group label {
+.dropdown-content {
+  display: none;
   position: absolute;
-  top: 0;
-  left: 0;
-  padding: 0.5vh;
-  pointer-events: none;
-  transition: 0.5s;
-  font-size: 1.5vh;
+  background-color: white;
+  border: 1px solid #ddd;
+  z-index: 1;
 }
 
-.form-group input:focus~label,
-.form-group input:valid~label {
-  top: -2vh;
-  left: 0;
-  padding: 0.5vh 0 0 0;
+.dropdown-content a {
+  color: black;
+  padding: 5px;
+  display: block;
+  text-decoration: none;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+  border-radius: 20px;
+  color: black;
+}
+
+/* Afficher le dropdown lorsqu'il est ouvert */
+.dropdown.show .dropdown-content {
+  display: block;
+}
+
+
+.page-link {
+  text-decoration: underline;
+  margin: 0;
+  text-align: end;
+  color: #747474;
+  text-decoration-color: #747474;
+}
+
+.page-link-label {
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.page-link-label:hover {
+  color: #000;
+}
+
+.form-btn {
+  padding: 10px 15px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  border-radius: 20px;
+  border: 0 !important;
+  outline: 0 !important;
+  background: #003C43;
+  color: white;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.form-btn:active {
+  box-shadow: none;
+}
+
+.sign-up-label {
+  margin: 0;
+  font-size: 10px;
+  color: #747474;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.sign-up-link {
+  margin-left: 1px;
+  font-size: 11px;
+  text-decoration: underline;
+  text-decoration-color: #003C43;
   color: #003C43;
-  font-size: 12px;
+  cursor: pointer;
+  font-weight: 800;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.buttons-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 20px;
+  gap: 15px;
+}
+
+.google-login-button {
+  border: 2px solid #747474;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+        rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 11px;
+  gap: 5px;
+  background-color: white;
+}
+
+.google-icon {
+  font-size: 18px;
+  margin-bottom: 1px;
 }
 
 /* logo */
 .logo {
-  width: 50vh;
-  height: 50vh;
+  width: 60vh;
+  height: 80vh;
   position: relative;
 
   border-radius: 100%;

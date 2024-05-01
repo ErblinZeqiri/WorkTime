@@ -62,5 +62,42 @@ fetch(url)
         console.error('Une erreur est survenue :', error);
     });
 
-const option = document.createElement('a');
-document.querySelector('#orgDrop').appendChild(option);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const dropdown = document.querySelector(".dropdown");
+        const searchInput = document.getElementById("searchInput");
+        const dropdownOptions = document.querySelectorAll(".dropdown-content a");
+      
+        searchInput.addEventListener("click", (event) => {
+          dropdown.classList.add("show");
+          event.stopPropagation();
+        });
+      
+        // Ajoute un gestionnaire de clic au dropdown pour empêcher sa fermeture lorsqu'on clique dedans
+        dropdown.addEventListener("click", (event) => {
+          event.stopPropagation();
+        });
+      
+        // Fonction pour fermer le dropdown
+        const dropdownClose = () => {
+            dropdown.classList.remove("show");
+        };
+
+        // Ajoute un gestionnaire d'événement au document pour masquer le dropdown lorsque l'utilisateur clique à l'extérieur de celui-ci
+        document.addEventListener("click", dropdownClose);
+
+        // Ajoute un gestionnaire d'événement pour chaque option du dropdown
+        dropdownOptions.forEach((option) => {
+            option.addEventListener("click", () => {
+                // Récupére le texte de l'option cliquée
+                const selectedOption = option.textContent;
+                // Fait quelque chose avec l'option sélectionnée, par exemple affichez-la dans la console
+                searchInput.value = selectedOption;
+                searchInput.classList.remove("dropdown-content");
+                // Ferme le dropdown
+                dropdownClose();
+            });
+        });
+
+      });
+      
