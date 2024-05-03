@@ -1,6 +1,7 @@
 export class Login{
     constructor(loginButton){
         this.button = loginButton;
+        
         this.init();
     }
 
