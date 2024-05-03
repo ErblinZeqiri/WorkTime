@@ -1,4 +1,4 @@
-import {ApiConnexion, fillOption, eventHandler } from './apiData.js';
+import { ApiConnexion, fillOption, eventHandler } from './providers/apiData.js';
 
 const dropdown = document.querySelector(".dropdown");
 const searchInput = document.getElementById("searchInput");
@@ -17,4 +17,4 @@ apiConnection.ApiConnexion().then(data => {
   console.error("Une erreur s'est produite lors de la récupération des données :", error);
 });
 eventHandl.initEvents();
-
+alert("")
