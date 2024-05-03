@@ -1,12 +1,15 @@
 import { ApiConnexion, fillOption, eventHandler } from './providers/apiData.js';
+import { Login } from './features/authentification/GoogleLogin.js';
 
 const dropdown = document.querySelector(".dropdown");
 const searchInput = document.getElementById("searchInput");
 const dropdownOptions = document.querySelectorAll(".dropdown-content a");
 const inputs = document.querySelectorAll('.input')
+const googleBtn = document.querySelector(".google-login-button");
 
 const apiConnection = new ApiConnexion();
 const eventHandl = new eventHandler(searchInput, dropdown, dropdownOptions, inputs);
+const loginWithGoogle = new Login(googleBtn);
 
 apiConnection.ApiConnexion().then(data => {
   const fillOp = new fillOption(searchInput,data);
@@ -17,4 +20,4 @@ apiConnection.ApiConnexion().then(data => {
   console.error("Une erreur s'est produite lors de la récupération des données :", error);
 });
 eventHandl.initEvents();
-alert("")
+// Gestion du clic sur le bouton
