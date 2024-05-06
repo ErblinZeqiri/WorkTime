@@ -1,6 +1,5 @@
 import { ApiConnexion, fillOption, eventHandler } from './providers/apiData.js';
 import { Login } from './features/authentification/GoogleLogin.js';
-import { firebaseConfig } from './providers/firebaseConfig.js';
 
 const dropdown = document.querySelector(".dropdown");
 const searchInput = document.getElementById("searchInput");
@@ -11,12 +10,6 @@ const googleBtn = document.querySelector(".google-login-button");
 const pathname = window.location.pathname;
 
 if(pathname === "/"){
-  // Crée une instance de la classe firebaseConfig
-  const config = new firebaseConfig();
-
-  // Initialise Firebase en appelant la méthode init()
-  config.init();
-
   const apiConnection = new ApiConnexion();
   const eventHandl = new eventHandler(searchInput, dropdown, dropdownOptions, inputs);
 
@@ -32,7 +25,7 @@ if(pathname === "/"){
 
   eventHandl.initEvents();
 
-  const loginWithGoogle = new Login(googleBtn, config.getApp());
+  const loginWithGoogle = new Login(googleBtn);
 }
 
 if(pathname === "/main.html"){

@@ -1,14 +1,16 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth"
+import { firebaseConfig } from "../../providers/firebaseConfig"
 
 export class Login{
-    constructor(loginButton, firebaseConf){
+    constructor(loginButton){
         this.button = loginButton;
-        this.app = firebaseConf
         this.init();
     }
 
     init(){
-        const auth = getAuth(this.app);
+        const firebaseConf = new firebaseConfig();
+        const app = firebaseConf.getApp()
+        const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
         this.button.addEventListener("click", () => {
