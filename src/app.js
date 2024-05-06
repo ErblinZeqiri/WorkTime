@@ -1,5 +1,6 @@
-import { ApiConnexion, fillOption, eventHandler } from './providers/apiData.js';
-import { Login } from './features/authentification/GoogleLogin.js';
+import { ApiConnexion, fillOption, eventHandler } from './providers/apiData';
+import { Login } from './features/authentification/GoogleLogin';
+import {  } from './features/index/indexPage'
 
 const dropdown = document.querySelector(".dropdown");
 const searchInput = document.getElementById("searchInput");
@@ -12,7 +13,6 @@ const pathname = window.location.pathname;
 if(pathname === "/"){
   const apiConnection = new ApiConnexion();
   const eventHandl = new eventHandler(searchInput, dropdown, dropdownOptions, inputs);
-
 
   apiConnection.ApiConnexion().then(data => {
     const fillOp = new fillOption(searchInput,data);

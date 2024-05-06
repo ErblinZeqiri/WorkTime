@@ -1,4 +1,4 @@
-import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth"
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { firebaseConfig } from "../../providers/firebaseConfig"
 
 export class Login{
@@ -16,8 +16,11 @@ export class Login{
         this.button.addEventListener("click", () => {
             signInWithPopup(auth, provider)
             .then((response) => {
-                console.log(response);
                 location.href = "main.html";
+                this.onResponse(response); 
+                localStorage.setItem('loginResponse', JSON.stringify(response)); // Stocke la réponse dans le stockage local
+                hoursDisplay.init();
+                return response
             })
             .catch((error) => {
                 console.log('error: ', error);
