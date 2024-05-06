@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+
 //import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "firebase/auth";
 
 
@@ -9,6 +10,7 @@ import { initializeApp } from "firebase/app";
 export class firebaseConfig {
     constructor() {
         this.init()
+        this.getApp()
     }
 
     init(){    
@@ -24,7 +26,10 @@ export class firebaseConfig {
         };
         
         // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        console.log(app)
+        this.app = initializeApp(firebaseConfig);
+    }
+
+    getApp() {
+        return this.app;
     }
 }

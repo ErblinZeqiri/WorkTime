@@ -8,23 +8,33 @@ const dropdownOptions = document.querySelectorAll(".dropdown-content a");
 const inputs = document.querySelectorAll('.input')
 const googleBtn = document.querySelector(".google-login-button");
 
-const apiConnection = new ApiConnexion();
-const eventHandl = new eventHandler(searchInput, dropdown, dropdownOptions, inputs);
-const loginWithGoogle = new Login(googleBtn);
+const pathname = window.location.pathname;
 
-// Crée une instance de la classe firebaseConfig
-const config = new firebaseConfig();
+if(pathname === "/"){
+  // Crée une instance de la classe firebaseConfig
+  const config = new firebaseConfig();
 
-// Initialise Firebase en appelant la méthode init()
-config.init();
+  // Initialise Firebase en appelant la méthode init()
+  config.init();
 
-apiConnection.ApiConnexion().then(data => {
-  const fillOp = new fillOption(searchInput,data);
+  const apiConnection = new ApiConnexion();
+  const eventHandl = new eventHandler(searchInput, dropdown, dropdownOptions, inputs);
 
-  // Ecout de l'événement de la saisie dans le champ de recherche
-  fillOp.fillOption();
-}).catch(error => {
-  console.error("Une erreur s'est produite lors de la récupération des données :", error);
-});
-eventHandl.initEvents();
-// Gestion du clic sur le bouton
+
+  apiConnection.ApiConnexion().then(data => {
+    const fillOp = new fillOption(searchInput,data);
+
+    // Ecout de l'événement de la saisie dans le champ de recherche
+    fillOp.fillOption();
+  }).catch(error => {
+    console.error("Une erreur s'est produite lors de la récupération des données :", error);
+  });
+
+  eventHandl.initEvents();
+
+  const loginWithGoogle = new Login(googleBtn, config.getApp());
+}
+
+if(pathname === "/main.html"){
+  
+}
