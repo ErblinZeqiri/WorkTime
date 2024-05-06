@@ -1,6 +1,6 @@
-const indexContent = document.querySelector('div')
-indexContent.classList.add('container', 'd-flex', 'justify-content-center', 'align-items-center', 'vh-100')
-indexContent.innerHTML = `
+const containerElement  = document.querySelector('div')
+containerElement .classList.add('container', 'd-flex', 'justify-content-center', 'align-items-center', 'vh-100')
+containerElement .innerHTML = `
 
 <div class="frame">
 <div class="d-flex main-content">

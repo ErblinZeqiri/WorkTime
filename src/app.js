@@ -1,6 +1,6 @@
-import { ApiConnexion, fillOption, eventHandler } from './providers/apiData';
-import { Login } from './features/authentification/GoogleLogin';
-import {  } from './features/index/indexPage'
+import { ApiConnection, fillOption, eventHandler } from './providers/apiData';
+import { GoogleLogin } from './features/authentication/GoogleLogin';
+import { DashboardPage } from './features/dashboard/dashboard'
 
 const dropdown = document.querySelector(".dropdown");
 const searchInput = document.getElementById("searchInput");
@@ -11,10 +11,10 @@ const googleBtn = document.querySelector(".google-login-button");
 const pathname = window.location.pathname;
 
 if(pathname === "/"){
-  const apiConnection = new ApiConnexion();
+  const apiConnection = new ApiConnection();
   const eventHandl = new eventHandler(searchInput, dropdown, dropdownOptions, inputs);
 
-  apiConnection.ApiConnexion().then(data => {
+  apiConnection.ApiConnection().then(data => {
     const fillOp = new fillOption(searchInput,data);
 
     // Ecout de l'événement de la saisie dans le champ de recherche
@@ -25,9 +25,12 @@ if(pathname === "/"){
 
   eventHandl.initEvents();
 
-  const loginWithGoogle = new Login(googleBtn);
+  googleBtn.addEventListener("click", () => {
+    const loginWithGoogle = new GoogleLogin()
+  })
+  
 }
 
-if(pathname === "/main.html"){
-  
+if(pathname === "/dashboard.html"){
+  const dashBoard = new DashboardPage();
 }
