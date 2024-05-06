@@ -1,6 +1,6 @@
-export class ApiConnexion {
+export class ApiConnection {
   // Définit la méthode pour établir une connexion à l'API
-  ApiConnexion() {
+  ApiConnection() {
     // Définit l'URL de l'API
     const apiUrl =
       "https://vector.sitg.ge.ch/arcgis/rest/services/Hosted/REG_ENTREPRISE_ETABLISSEMENT/FeatureServer/0/query";
