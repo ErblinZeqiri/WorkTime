@@ -9,15 +9,20 @@ import {
   onValue,
   child,
 } from "firebase/database";
+import { qrCodeScanner } from "../../components/qrScanner";
 
 export class DashboardPage {
   constructor() {
+    const firebase = new firebaseConfig();
+    const app = firebase.getApp();
+    this.user = getAuth(app).currentUser;
     this.init();
   }
 
   init() {
     const firebase = new firebaseConfig();
     const app = firebase.getApp();
+
     onAuthStateChanged(getAuth(app), (user) => {
       if (user) {
         const uid = user.uid;
@@ -28,12 +33,19 @@ export class DashboardPage {
           name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
         const capitalizedFirstName =
           firstname.charAt(0).toUpperCase() + firstname.slice(1).toLowerCase();
+        const div = document.querySelector("div")
 
-        document.querySelector(
-          "div"
-        ).innerHTML = `<h1 class="text-center">${capitalizedName} ${capitalizedFirstName}</h1> 
-        <button type="button" class="btn btn-outline-success">+</button>
+        div.innerHTML = `<h1 class="text-center">${capitalizedName} ${capitalizedFirstName}</h1> 
+        <button type="button" class="addQr btn btn-outline-success">+</button>
+        <video></video>
         `;
+        const qr = document.querySelector(".addQr");
+        console.log("sadhhdsjk", qr)
+        qr.addEventListener("click", () => {
+            //alert("<video></video>", scan.init())
+            const video = document.querySelector("video");
+            const scan = new qrCodeScanner(video)
+        });
 
         const database = getDatabase(app);
         const collection = child(ref(database), "Users");
@@ -47,17 +59,17 @@ export class DashboardPage {
                 for (const date in userDates) {
                   const entry = userDates[date].Entrée;
                   const exit = userDates[date].Sortie;
-                  document.querySelector("div").innerHTML += `
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            ${date}
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-up">
-                            <li><a class="dropdown-item" href="#">Entrée: ${entry}</a></li>
-                            <li><a class="dropdown-item" href="#">Sortie: ${exit}</a></li>
-                        </ul>
-                    </div>
-                    `;
+                 div.insertAdjacentHTML('afterend', `
+                 <div class="dropdown">
+                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                         ${date}
+                     </button>
+                     <ul class="dropdown-menu dropdown-menu-up">
+                         <li><a class="dropdown-item" href="#">Entrée: ${entry}</a></li>
+                         <li><a class="dropdown-item" href="#">Sortie: ${exit}</a></li>
+                     </ul>
+                 </div>
+                 `);
                 }
               }
             } else {

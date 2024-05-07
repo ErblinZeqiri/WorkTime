@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
-    "firebase": "^10.11.1"
+    "firebase": "^10.11.1",
+    "qr-scanner": "^1.4.2"
   }
 }
