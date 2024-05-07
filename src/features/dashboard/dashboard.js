@@ -37,15 +37,29 @@ export class DashboardPage {
 
         div.innerHTML = `<h1 class="text-center">${capitalizedName} ${capitalizedFirstName}</h1> 
         <button type="button" class="addQr btn btn-outline-success">+</button>
-        <video></video>
+        <button type="button" class="minimize btn btn-outline-success">-</button>
+        <video class="d-none"></video>
         `;
+
         const qr = document.querySelector(".addQr");
-        console.log("sadhhdsjk", qr)
+        const qrMin = document.querySelector(".minimize");
+        const video = document.querySelector("video");
+        const QrCodeScanner = new qrCodeScanner(video);
+
         qr.addEventListener("click", () => {
-            //alert("<video></video>", scan.init())
-            const video = document.querySelector("video");
-            const scan = new qrCodeScanner(video)
+          video.classList.remove("d-none");
+          video.classList.add("d-block");
+          QrCodeScanner.startScan();
+          console.log(
+            QrCodeScanner.startScan())
         });
+        
+        qrMin.addEventListener("click", () => {
+          video.classList.remove("d-block");
+          video.classList.add("d-none");
+          QrCodeScanner.stopScan();
+        })
+
 
         const database = getDatabase(app);
         const collection = child(ref(database), "Users");

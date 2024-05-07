@@ -2,26 +2,21 @@
 import QrScanner from 'qr-scanner';
 
 export class qrCodeScanner{
-    constructor(videoElem) {
-        this.videoElem = videoElem
-        this.init();
+    constructor(videoElement) {
+        this.videoElement = videoElement        
+        this.qrScanner = new QrScanner(this.videoElement, {
+            onDecode: result => {
+                console.log('Code QR décodé :', result);
+            }
+        });
     }
 
-    async init() {
-        try {
-            // Créez une nouvelle instance de QrScanner
-            const qrScanner = new QrScanner(
-                this.videoElem,
-                result => console.log('decoded qr code:', result),
-                { /* your options or returnDetailedScanResult: true if you're not specifying any other options */ },
-            );
-            qrScanner.start();
+    startScan() {
+        this.qrScanner.start();
+    }
 
-            // Arrêtez le scan
-            //qrScanner.stop();
-        } catch (error) {
-            console.error('Erreur lors du scan:', error);
-        }
+    stopScan() {
+        this.qrScanner.stop();
     }
 
 }
