@@ -10,7 +10,7 @@ containerElement .innerHTML = `
         <p class="title">Welcome</p>
         <form class="form">
           <input type="text" class="input" placeholder="Name" />
-          <input type="text" class="input" placeholder="Forname" />           
+          <input type="text" class="input" placeholder="Firstname" />           
 
           <div class="dropdown">
             <input type="text" class="input" id="searchInput" placeholder="Organisation" />
