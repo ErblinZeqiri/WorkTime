@@ -10,6 +10,7 @@ import {
   child,
 } from "firebase/database";
 import { qrCodeScanner } from "../../components/qrScanner";
+import { QRCodeGen } from "../../components/qrCodeGenerator";
 
 export class DashboardPage {
   constructor() {
@@ -39,6 +40,7 @@ export class DashboardPage {
         <button type="button" class="addQr btn btn-outline-success">+</button>
         <button type="button" class="minimize btn btn-outline-success">-</button>
         <video></video>
+        <img id="qrCodeImg"></img>
         `;
 
         const qr = document.querySelector(".addQr");
@@ -46,8 +48,20 @@ export class DashboardPage {
         const video = document.querySelector("video");
 
         const handleQRCodeDecoded = (result) => {
-          console.log(result.data)
+          console.log(result)
         };
+
+        // Créez une instance de QRCodeGen
+        const qrCodeGen = new QRCodeGen();
+
+        // Appelez la méthode init de QRCodeGen
+        qrCodeGen.init();
+
+        // Sélectionnez l'élément img où vous voulez afficher le QR code
+        const qrCodeImg = document.querySelector('#qrCodeImg');
+
+        // Définir l'URL de l'image générée comme source de l'élément img
+        qrCodeImg.src = './qrCode.png';
 
         const QrCodeScanner = new qrCodeScanner(video, handleQRCodeDecoded);
         video.style.display = 'block';
