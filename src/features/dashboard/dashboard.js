@@ -33,33 +33,34 @@ export class DashboardPage {
           name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
         const capitalizedFirstName =
           firstname.charAt(0).toUpperCase() + firstname.slice(1).toLowerCase();
-        const div = document.querySelector("div")
+        const div = document.querySelector("div");
 
         div.innerHTML = `<h1 class="text-center">${capitalizedName} ${capitalizedFirstName}</h1> 
         <button type="button" class="addQr btn btn-outline-success">+</button>
         <button type="button" class="minimize btn btn-outline-success">-</button>
-        <video class="d-none"></video>
+        <video></video>
         `;
 
         const qr = document.querySelector(".addQr");
         const qrMin = document.querySelector(".minimize");
         const video = document.querySelector("video");
-        const QrCodeScanner = new qrCodeScanner(video);
+
+        const handleQRCodeDecoded = (result) => {
+          console.log(result.data)
+        };
+
+        const QrCodeScanner = new qrCodeScanner(video, handleQRCodeDecoded);
+        video.style.display = 'block';
 
         qr.addEventListener("click", () => {
-          video.classList.remove("d-none");
-          video.classList.add("d-block");
+          video.style.display = 'block';
           QrCodeScanner.startScan();
-          console.log(
-            QrCodeScanner.startScan())
         });
-        
-        qrMin.addEventListener("click", () => {
-          video.classList.remove("d-block");
-          video.classList.add("d-none");
-          QrCodeScanner.stopScan();
-        })
 
+        qrMin.addEventListener("click", () => {
+          video.style.display = 'none';
+          QrCodeScanner.stopScan();
+        });
 
         const database = getDatabase(app);
         const collection = child(ref(database), "Users");
@@ -73,7 +74,9 @@ export class DashboardPage {
                 for (const date in userDates) {
                   const entry = userDates[date].Entrée;
                   const exit = userDates[date].Sortie;
-                 div.insertAdjacentHTML('afterend', `
+                  div.insertAdjacentHTML(
+                    "afterend",
+                    `
                  <div class="dropdown">
                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                          ${date}
@@ -83,7 +86,8 @@ export class DashboardPage {
                          <li><a class="dropdown-item" href="#">Sortie: ${exit}</a></li>
                      </ul>
                  </div>
-                 `);
+                 `
+                  );
                 }
               }
             } else {

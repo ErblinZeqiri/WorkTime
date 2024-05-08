@@ -213,3 +213,11 @@ body {
   max-width: 40vw;
   max-height: 40vh;
 }
+
+.qr-scanner .highlight {
+  box-shadow: 0 0 0 3px rgba(255, 255, 0, 0.7);
+}
+
+.qr-scanner video {
+  border: 3px solid rgba(0, 255, 0, 0.7);
+}
