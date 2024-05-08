@@ -34,3 +34,15 @@ export class qrCodeScanner {
     }
 
 }
+
+export class qrScanner {
+    static scanImage(imageElement) {
+        const scanner = new QrScanner();
+        return scanner.scanImage(imageElement);
+        
+    }
+
+    init(){
+        return this.scanner.scanImage(imageElement);
+    }
+}

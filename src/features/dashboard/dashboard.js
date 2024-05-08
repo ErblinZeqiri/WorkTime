@@ -9,7 +9,7 @@ import {
   onValue,
   child,
 } from "firebase/database";
-import { qrCodeScanner } from "../../components/qrScanner";
+import { qrCodeScanner, qrScanner } from "../../components/qrScanner";
 import { QRCodeGen } from "../../components/qrCodeGenerator";
 
 export class DashboardPage {
@@ -24,7 +24,7 @@ export class DashboardPage {
     const firebase = new firebaseConfig();
     const app = firebase.getApp();
 
-    onAuthStateChanged(getAuth(app), (user) => {
+    onAuthStateChanged(getAuth(app), async (user) => {
       if (user) {
         const uid = user.uid;
         const name = user.displayName.split(" ")[0];
@@ -41,38 +41,56 @@ export class DashboardPage {
         <button type="button" class="minimize btn btn-outline-success">-</button>
         <video></video>
         <img id="qrCodeImg"></img>
+
+        <label for="avatar">Choose a profile picture:</label>
+
+        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
         `;
 
         const qr = document.querySelector(".addQr");
         const qrMin = document.querySelector(".minimize");
         const video = document.querySelector("video");
+        const imageElement = document.querySelector("#avatar");
 
         const handleQRCodeDecoded = (result) => {
-          console.log(result)
+          const jsonData = JSON.parse(result.data);
+          const qrUser = Object.keys(jsonData)[0];
+          console.log(qrUser);
+          const qrUid = qrUser;
+          console.log(qrUid);
+          for (let i in jsonData) {
+            /*  console.log(jsonData)
+            console.log(i) */
+          }
         };
 
-        // Créez une instance de QRCodeGen
+        /* // Créer une instance de QRCodeGen
         const qrCodeGen = new QRCodeGen();
 
-        // Appelez la méthode init de QRCodeGen
-        qrCodeGen.init();
+        // Générer le QR code
+        const qrDataURL = await qrCodeGen.init();
 
-        // Sélectionnez l'élément img où vous voulez afficher le QR code
+        // Sélectionner l'élément img où vous voulez afficher le QR code
         const qrCodeImg = document.querySelector('#qrCodeImg');
 
         // Définir l'URL de l'image générée comme source de l'élément img
-        qrCodeImg.src = './qrCode.png';
+        qrCodeImg.src = qrDataURL;*/
 
         const QrCodeScanner = new qrCodeScanner(video, handleQRCodeDecoded);
-        video.style.display = 'block';
-
+        const qrScan = new qrScanner(imageElement);
+        video.style.display = "block";
+        
         qr.addEventListener("click", () => {
-          video.style.display = 'block';
-          QrCodeScanner.startScan();
+          qrScanner.scanImage(imageElement)
+            .then((result) => {
+              console.log(result);
+              // Gérez le résultat de la numérisation ici
+            })
+            .catch((error) => console.error(error || "Aucun code QR trouvé."));
         });
 
         qrMin.addEventListener("click", () => {
-          video.style.display = 'none';
+          video.style.display = "none";
           QrCodeScanner.stopScan();
         });
 
