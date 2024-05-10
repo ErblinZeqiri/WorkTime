@@ -1,9 +1,7 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { firebaseConfig } from "../../providers/firebaseConfig";
-import { getDatabase } from "firebase/database";
 // import { QRCodeGen } from "../../components/qrCodeGenerator";
-import { UserDatabaseManager } from "../data/userDatabaseManager"; 
-import { displayElements } from "./displayElements";
+import { DisplayElements } from "./displayElements";
 
 export class DashboardPage {
   constructor() {
@@ -16,7 +14,7 @@ export class DashboardPage {
   init() {
     onAuthStateChanged(getAuth(this.app), async (user) => {
       if (user) {
-        const displayElement = new displayElements(user, this.app); 
+      const displayElements = new DisplayElements(user, this.app); 
       } else {
         window.location.href = "/index.html";
       }

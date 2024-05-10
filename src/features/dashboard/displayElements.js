@@ -1,14 +1,15 @@
-import imgUrl from "../../assets/images/qrcode.jpg";
-import { getDatabase, child } from "firebase/database";
+import imgUrl from "../../assets/images/qrcode.png";
+import { getDatabase, child, ref, get } from "firebase/database";
 import { qrCodeScanner } from "../../components/qrScanner";
 import { UserDatabaseManager } from "../data/userDatabaseManager";
 
-export class displayElements {
+export class DisplayElements {
     constructor(user, app){
         this.user = user
         this.app = app
         this.database = getDatabase(this.app);
         this.imgUrl = imgUrl
+        this.init();
     }
 
     init(){
@@ -27,7 +28,7 @@ export class displayElements {
         <button type="button" class="addQr btn btn-outline-success">+</button>
         <button type="button" class="minimize btn btn-outline-success">-</button>
         <video></video>
-        <img id="qrCodeImg" src="${this.imgUrl}" style="display:none;"/>
+        <img id="qrCodeImg" src="" style="display:block;"/>
 
         <label for="avatar">Choose a profile picture:</label>
 
@@ -38,26 +39,28 @@ export class displayElements {
         const qrMin = document.querySelector(".minimize");
         const video = document.querySelector("video");
         const imageInput = document.querySelector("#qrCodeImg");
+        const Input = document.querySelector("#avatar");
 
-/*         const handleQRCodeDecoded = (result) => {
-          const jsonData = JSON.parse(result.data);
-          const qrUser = Object.keys(jsonData)[0];
-          console.log(qrUser);
-          const qrUid = qrUser;
-          console.log(qrUid);
-          for (let i in jsonData) {
-            console.log(jsonData)
-            console.log(i)
-          }
-        }; */
-
-        const QrCodeScanner = new qrCodeScanner(video, /* handleQRCodeDecoded, */ imageInput);
+        const QrCodeScanner = new qrCodeScanner(video, imageInput, uid);
         video.style.display = "block";
 
-        qr.addEventListener("click", () => {
+        Input.addEventListener('change', async (event) => {
+          const file = event.target.files[0];
+          
+          if (file) {
+              const imageUrl = URL.createObjectURL(file);
+              imageInput.src = imageUrl;
+              const { formattedDate, 
+                timestamp } = await QrCodeScanner.scanImage();
+              const UserDatabase = new UserDatabaseManager(this.database, uid, formattedDate, timestamp);
+              const resultDatabase = UserDatabase.updateUserEntry()
+
+          }
+      });
+
+/*         qr.addEventListener("click", () => {
           QrCodeScanner.scanImage()
               .then(result => {
-                  // Récupérez les données de l'utilisateur à partir de la structure résultante
                   const userData = result.Users[uid];
                   const UserDatabase = new UserDatabaseManager(getDatabase);
                   
@@ -65,12 +68,12 @@ export class displayElements {
               .catch(error => {
                   console.error("Erreur lors de la numérisation du QR code :", error);
               });
-      });
+        });
       
       qrMin.addEventListener("click", () => {
         video.style.display = "none";
         QrCodeScanner.stopScan();
-      });
+      }); */
 
       get(collection)
         .then((snapshot) => {
@@ -79,8 +82,12 @@ export class displayElements {
             for (const userId in data) {
               const userDates = data[userId];
               for (const date in userDates) {
-                const entry = userDates[date].Entrée;
-                const exit = userDates[date].Sortie;
+                
+                const entry = userDates[date][1];
+                const exit = userDates[date][2];
+                
+                console.log("Heure d'entrée:", entry);
+                console.log("Heure de sortie:", exit);
                 div.insertAdjacentHTML(
                   "afterend",
                   `

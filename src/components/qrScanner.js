@@ -2,19 +2,18 @@
 import QrScanner from 'qr-scanner';
 
 export class qrCodeScanner {
-    constructor(videoElement, onDecode, image) {
+    constructor(videoElement, image, uid) {
         this.videoElement = videoElement;
-        this.onDecode = onDecode;
         this.image = image
+        this.uid = uid
         this.qrScanner = new QrScanner(
-            this.videoElement
-/*             this.handleQRCodeDecoded.bind(this),
+            this.videoElement,
             { 
                 highlightScanRegion: true,
                 highlightCodeOutline: true,
                 maxScansPerSecond: 0.5
-            }, */
-        );
+            },
+        )
     }
 
     startScan() {
@@ -28,20 +27,27 @@ export class qrCodeScanner {
         this.videoElement.style.display = 'none';
         this.qrScanner.stop();
     }
-    
-/*     async handleQRCodeDecoded(result) {
-        const jsonData = JSON.parse(result.data);
-        const userId = Object.keys(jsonData)[0]; // Obtenez l'ID de l'utilisateur à partir du code QR
-        const date = "2024-05-05"; // Exemple de date
-        const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Obtenez l'heure actuelle
-        await this.dashboardPage.updateUserEntry(date, currentTime); // Mettez à jour les données de l'utilisateur
-    } */
 
     scanImage() {
         return QrScanner.scanImage(this.image, {})
         .then(result => {
             const jsonData = JSON.parse(result);
-            return jsonData;
+            const userUid = Object.keys(jsonData.Users)[0];
+            if (userUid === this.uid){
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, '0'); // Les mois sont indexés à partir de zéro, donc on ajoute 1 et on remplit avec des zéros si nécessaire
+                const day = String(today.getDate()).padStart(2, '0'); // On remplit avec des zéros si nécessaire
+                const formattedDate = `${year}-${month}-${day}`;
+        
+                const hours = String(today.getHours()).padStart(2, '0'); // Obtient l'heure actuelle en format 24 heures
+                const minutes = String(today.getMinutes()).padStart(2, '0'); // Obtient les minutes actuelles
+                const timestamp = `${hours}:${minutes}`;
+
+                return {formattedDate , timestamp}
+            } else{
+                alert(`Not the same Uid`)
+            }
         })
         .catch(error => {
             console.error(error || 'No QR code found.');
