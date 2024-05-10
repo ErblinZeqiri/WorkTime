@@ -9,7 +9,7 @@ import { initializeApp } from "firebase/app";
 
 export class firebaseConfig {
     constructor() {
-        this.init()
+        this.init() 
         this.getApp()
     }
 
