@@ -61,22 +61,25 @@ export class DisplayElements {
       }
     });
 
-    /*         qr.addEventListener("click", () => {
-          QrCodeScanner.scanImage()
-              .then(result => {
-                  const userData = result.Users[uid];
-                  const UserDatabase = new UserDatabaseManager(getDatabase);
-                  
-              })
-              .catch(error => {
-                  console.error("Erreur lors de la numérisation du QR code :", error);
-              });
-        });
-      
-      qrMin.addEventListener("click", () => {
-        video.style.display = "none";
-        QrCodeScanner.stopScan();
-      }); */
+    qr.addEventListener("click", async () => {
+      try {
+          const { formattedDate, timestamp } = await QrCodeScanner.startScan();
+          const UserDatabase = new UserDatabaseManager(
+              this.database,
+              uid,
+              formattedDate,
+              timestamp
+          );
+          const resultDatabase = UserDatabase.updateUserEntry();
+      } catch (error) {
+          console.error("Erreur lors de la numérisation QR :", error);
+      }
+  });
+
+    qrMin.addEventListener("click", () => {
+      video.style.display = "none";
+      QrCodeScanner.stopScan();
+    });
 
     get(collection)
       .then((snapshot) => {
@@ -87,9 +90,7 @@ export class DisplayElements {
             Object.keys(userDates).forEach((datesKey) => {
               const datesObject = userDates[datesKey];
               Object.keys(datesObject).forEach((dates) => {
-                
-                const dropdownHTML =
-                  `
+                const dropdownHTML = `
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             ${dates}
@@ -100,18 +101,20 @@ export class DisplayElements {
                     </div>
                   `;
                 div.insertAdjacentHTML("afterend", dropdownHTML);
-                const menuDropdown = div.nextElementSibling.querySelector(".dropdown-menu");
+                const menuDropdown =
+                  div.nextElementSibling.querySelector(".dropdown-menu");
 
                 const hoursObject = datesObject[dates];
                 Object.keys(hoursObject).forEach((hour) => {
-                  const entryObject = hoursObject[hour]
-                  console.log(entryObject)
+                  const entryObject = hoursObject[hour];
                   let entreeSortie = "";
+
                   if (hour % 2 === 0) {
-                    entreeSortie = "Sortie"
-                  }else {
-                    entreeSortie = "Entrée"
+                    entreeSortie = "Sortie";
+                  } else {
+                    entreeSortie = "Entrée";
                   }
+
                   menuDropdown.insertAdjacentHTML(
                     "beforeend",
                     `<li><a class="dropdown-item" href="#">${entreeSortie}: ${entryObject}</a></li>`
