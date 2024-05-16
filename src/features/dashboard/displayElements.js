@@ -61,9 +61,9 @@ export class DisplayElements {
       }
     });
 
-    qr.addEventListener("click", async () => {
+    qr.addEventListener("click", async  () => {
       try {
-          const { formattedDate, timestamp } = await QrCodeScanner.startScan();
+        const { formattedDate, timestamp } = await QrCodeScanner.startScan();
           const UserDatabase = new UserDatabaseManager(
               this.database,
               uid,
@@ -83,8 +83,15 @@ export class DisplayElements {
 
     get(collection)
       .then((snapshot) => {
-        if (snapshot.exists()) {
-          const userObject = snapshot.val();
+        const userObject = snapshot.val();
+        let userHasData = false;
+        for (const key in userObject) {
+          if (key === uid) {
+            userHasData = true;
+            break;
+          }
+        }
+        if (userHasData) {
           Object.keys(userObject).forEach((userId) => {
             const userDates = userObject[userId];
             Object.keys(userDates).forEach((datesKey) => {
